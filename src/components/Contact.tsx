@@ -3,48 +3,11 @@ import { Phone, Mail, MapPin, Instagram, Globe, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
 
-const contactInfo = [
-  {
-    icon: Phone,
-    label: "Telefon",
-    value: "062 610 206",
-    href: "tel:+38762610206",
-  },
-  {
-    icon: Phone,
-    label: "Alternatif",
-    value: "062 620 162",
-    href: "tel:+38762620162",
-  },
-  {
-    icon: Mail,
-    label: "E-posta",
-    value: "berradoosarajevo@gmail.com",
-    href: "mailto:berradoosarajevo@gmail.com",
-  },
-  {
-    icon: MapPin,
-    label: "Adres",
-    value: "Mula Mustafe Bašeskije 2, Sarajevo",
-    href: "https://maps.google.com/?q=Mula+Mustafe+Bašeskije+2+Sarajevo",
-  },
-  {
-    icon: Instagram,
-    label: "Instagram",
-    value: "@BERRA.DOO",
-    href: "https://www.instagram.com/BERRA.DOO",
-  },
-  {
-    icon: Globe,
-    label: "Web",
-    value: "berrabalkan.com",
-    href: "https://berrabalkan.com",
-  },
-];
-
 export function Contact() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -52,9 +15,48 @@ export function Contact() {
     message: "",
   });
 
+  const contactInfo = [
+    {
+      icon: Phone,
+      label: t("contact.phoneLabel"),
+      value: "062 610 206",
+      href: "tel:+38762610206",
+    },
+    {
+      icon: Phone,
+      label: t("contact.phoneLabel"),
+      value: "062 620 162",
+      href: "tel:+38762620162",
+    },
+    {
+      icon: Mail,
+      label: t("contact.emailLabel"),
+      value: "berradoosarajevo@gmail.com",
+      href: "mailto:berradoosarajevo@gmail.com",
+    },
+    {
+      icon: MapPin,
+      label: t("contact.address"),
+      value: "Mula Mustafe Bašeskije 2, Sarajevo",
+      href: "https://maps.google.com/?q=Mula+Mustafe+Bašeskije+2+Sarajevo",
+    },
+    {
+      icon: Instagram,
+      label: "Instagram",
+      value: "@BERRA.DOO",
+      href: "https://www.instagram.com/BERRA.DOO",
+    },
+    {
+      icon: Globe,
+      label: "Web",
+      value: "berrabalkan.com",
+      href: "https://berrabalkan.com",
+    },
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.");
+    toast.success("Mesajınız başarıyla gönderildi!");
     setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
@@ -64,13 +66,13 @@ export function Contact() {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Bize Ulaşın
+            {t("contact.subtitle")}
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            İletişime Geçin
+            {t("contact.title")}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Sorularınız için bize ulaşın, size yardımcı olmaktan mutluluk duyarız.
+            {t("contact.description")}
           </p>
         </div>
 
@@ -78,16 +80,16 @@ export function Contact() {
           {/* Contact Form */}
           <div className="bg-card rounded-3xl p-8 shadow-card border border-border/50">
             <h3 className="font-display text-xl font-semibold text-foreground mb-6">
-              Mesaj Gönderin
+              {t("contact.send")}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Adınız
+                    {t("contact.name")}
                   </label>
                   <Input
-                    placeholder="Adınızı giriniz"
+                    placeholder={t("contact.name")}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
@@ -95,10 +97,10 @@ export function Contact() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Telefon
+                    {t("contact.phone")}
                   </label>
                   <Input
-                    placeholder="Telefon numaranız"
+                    placeholder={t("contact.phone")}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
@@ -106,11 +108,11 @@ export function Contact() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
-                  E-posta
+                  {t("contact.email")}
                 </label>
                 <Input
                   type="email"
-                  placeholder="E-posta adresiniz"
+                  placeholder={t("contact.email")}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
@@ -118,10 +120,10 @@ export function Contact() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
-                  Mesajınız
+                  {t("contact.message")}
                 </label>
                 <Textarea
-                  placeholder="Mesajınızı yazın..."
+                  placeholder={t("contact.message")}
                   rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -130,7 +132,7 @@ export function Contact() {
               </div>
               <Button type="submit" size="lg" className="w-full">
                 <Send className="w-4 h-4" />
-                Mesaj Gönder
+                {t("contact.send")}
               </Button>
             </form>
           </div>
@@ -138,7 +140,7 @@ export function Contact() {
           {/* Contact Info */}
           <div>
             <h3 className="font-display text-xl font-semibold text-foreground mb-6">
-              İletişim Bilgilerimiz
+              {t("footer.contactTitle")}
             </h3>
             <div className="grid gap-4">
               {contactInfo.map((item, index) => (

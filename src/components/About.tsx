@@ -1,46 +1,44 @@
 import { CheckCircle, Droplets, Leaf, Award } from "lucide-react";
-
-const features = [
-  {
-    icon: Droplets,
-    title: "Özel Köpük Formülü",
-    description: "Sihirli pompa sayesinde 20 kat hava ile birleşen 0.7g sıvı, ipeksi köpüğe dönüşür.",
-  },
-  {
-    icon: Leaf,
-    title: "Doğal İçerikler",
-    description: "pH 5.5 değeri ve paraben içermeyen formül ile cildinize zarar vermez.",
-  },
-  {
-    icon: Award,
-    title: "Sertifikalı Üretim",
-    description: "ISO 9001, ISO 14001 ve TSE belgeli, uluslararası standartlarda üretim.",
-  },
-];
-
-const advantages = [
-  "İdeal temizlik sağlayan yüksek kaliteli köpük",
-  "Kremsi ve uzun süreli hoş koku",
-  "Ekonomik kullanım - sıvı sabunlardan daha tasarruflu",
-  "Dermatololik olarak test edilmiş formül",
-  "Kolay durulanan, iz bırakmayan yapı",
-  "Klasik, hassas cilt, doğal ve antibakteriyel çeşitleri",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function About() {
+  const { t } = useLanguage();
+
+  const features = [
+    {
+      icon: Droplets,
+      title: t("about.feature1.title"),
+      description: t("about.feature1.desc"),
+    },
+    {
+      icon: Leaf,
+      title: t("about.feature2.title"),
+      description: t("about.feature2.desc"),
+    },
+    {
+      icon: Award,
+      title: t("about.feature3.title"),
+      description: t("about.feature3.desc"),
+    },
+  ];
+
+  const advantages = [
+    t("about.feature4.title") + " - " + t("about.feature4.desc"),
+  ];
+
   return (
     <section id="hakkimizda" className="section-padding bg-background">
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Neden Biz?
+            {t("about.subtitle")}
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            FOMY ile Fark Yaratın
+            {t("about.title")}
           </h2>
           <p className="text-muted-foreground text-lg">
-            2000 yılından bu yana hızlı ve pratik temizlik sloganıyla milyonlarca kullanıcıya ulaştık.
+            {t("about.description")}
           </p>
         </div>
 
@@ -64,14 +62,19 @@ export function About() {
           ))}
         </div>
 
-        {/* Advantages Section */}
+        {/* Brand Section */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">
-              FOMY Köpük Sabunun Avantajları
+              {t("about.feature4.title")}
             </h3>
             <div className="grid gap-4">
-              {advantages.map((advantage, index) => (
+              {[
+                t("about.feature1.title") + " - " + t("about.feature1.desc"),
+                t("about.feature2.title") + " - " + t("about.feature2.desc"),
+                t("about.feature3.title") + " - " + t("about.feature3.desc"),
+                t("about.feature4.title") + " - " + t("about.feature4.desc"),
+              ].map((advantage, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                   <span className="text-foreground/80">{advantage}</span>
@@ -91,7 +94,7 @@ export function About() {
                     Berra d.o.o.
                   </h4>
                   <p className="text-muted-foreground">
-                    Temiz, Güvenli, Profesyonel
+                    {t("hero.title1")} {t("hero.title2")}
                   </p>
                   <div className="mt-6 flex justify-center gap-4 text-sm">
                     <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">ISO 9001</span>
