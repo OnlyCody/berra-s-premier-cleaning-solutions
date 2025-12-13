@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#anasayfa", label: "Ana Sayfa" },
-  { href: "#hakkimizda", label: "Hakkımızda" },
-  { href: "#urunler", label: "Ürünler" },
-  { href: "#sertifikalar", label: "Sertifikalar" },
-  { href: "#iletisim", label: "İletişim" },
+  { href: "/", label: "Ana Sayfa" },
+  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/urunler", label: "Ürünler" },
+  { href: "/sertifikalar", label: "Sertifikalar" },
+  { href: "/iletisim", label: "İletişim" },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +24,16 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  const isActive = (href: string) => {
+    if (href === "/") return location.pathname === "/";
+    return location.pathname.startsWith(href);
+  };
 
   return (
     <header
@@ -34,7 +46,7 @@ export function Navbar() {
     >
       <div className="container-wide flex items-center justify-between">
         {/* Logo */}
-        <a href="#anasayfa" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl gradient-hero flex items-center justify-center shadow-soft">
             <span className="text-primary-foreground font-display font-bold text-xl">B</span>
           </div>
@@ -44,18 +56,23 @@ export function Navbar() {
             </h1>
             <span className="text-xs text-muted-foreground">d.o.o.</span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
-              className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-primary/5"
+              to={link.href}
+              className={cn(
+                "px-4 py-2 text-sm font-medium transition-colors rounded-lg",
+                isActive(link.href)
+                  ? "text-primary bg-primary/10"
+                  : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+              )}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -65,8 +82,8 @@ export function Navbar() {
             <Phone className="w-4 h-4" />
             062 610 206
           </a>
-          <Button className="hidden sm:inline-flex" size="sm">
-            Teklif Al
+          <Button className="hidden sm:inline-flex" size="sm" asChild>
+            <Link to="/iletisim">Teklif Al</Link>
           </Button>
 
           {/* Mobile Menu Button */}
@@ -89,14 +106,18 @@ export function Navbar() {
       >
         <nav className="container-wide py-4 flex flex-col gap-2">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="px-4 py-3 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+              to={link.href}
+              className={cn(
+                "px-4 py-3 text-sm font-medium rounded-lg transition-colors",
+                isActive(link.href)
+                  ? "text-primary bg-primary/10"
+                  : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+              )}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <div className="pt-4 border-t border-border mt-2">
             <a href="tel:+38762610206" className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-primary">

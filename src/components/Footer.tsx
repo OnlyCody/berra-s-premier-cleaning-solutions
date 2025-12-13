@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Phone, Mail, Instagram, MapPin } from "lucide-react";
 
 export function Footer() {
@@ -10,7 +11,7 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
+            <Link to="/" className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl gradient-hero flex items-center justify-center">
                 <span className="text-primary-foreground font-display font-bold text-xl">B</span>
               </div>
@@ -18,7 +19,7 @@ export function Footer() {
                 <h3 className="font-display font-bold text-xl leading-none">BERRA</h3>
                 <span className="text-sm text-primary-foreground/60">d.o.o.</span>
               </div>
-            </div>
+            </Link>
             <p className="text-primary-foreground/80 max-w-md mb-6">
               Temiz, güvenli, profesyonel. FOMY temizlik köpüğü ile hızlı ve pratik hijyen çözümleri sunuyoruz.
               20 yılı aşkın deneyimimizle güvenilir ortağınız.
@@ -46,19 +47,19 @@ export function Footer() {
             <h4 className="font-display font-semibold text-lg mb-6">Hızlı Bağlantılar</h4>
             <ul className="space-y-3">
               {[
-                { label: "Ana Sayfa", href: "#anasayfa" },
-                { label: "Hakkımızda", href: "#hakkimizda" },
-                { label: "Ürünler", href: "#urunler" },
-                { label: "Sertifikalar", href: "#sertifikalar" },
-                { label: "İletişim", href: "#iletisim" },
+                { label: "Ana Sayfa", href: "/" },
+                { label: "Hakkımızda", href: "/hakkimizda" },
+                { label: "Ürünler", href: "/urunler" },
+                { label: "Sertifikalar", href: "/sertifikalar" },
+                { label: "İletişim", href: "/iletisim" },
               ].map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
