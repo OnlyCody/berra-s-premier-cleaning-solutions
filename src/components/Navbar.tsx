@@ -2,20 +2,23 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "/", label: "Ana Sayfa" },
-  { href: "/hakkimizda", label: "Hakkımızda" },
-  { href: "/urunler", label: "Ürünler" },
-  { href: "/sertifikalar", label: "Sertifikalar" },
-  { href: "/iletisim", label: "İletişim" },
-];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "/", label: t("nav.home") },
+    { href: "/hakkimizda", label: t("nav.about") },
+    { href: "/urunler", label: t("nav.products") },
+    { href: "/sertifikalar", label: t("nav.certificates") },
+    { href: "/iletisim", label: t("nav.contact") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,14 +79,15 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA & Mobile Menu */}
-        <div className="flex items-center gap-4">
+        {/* CTA & Language & Mobile Menu */}
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
           <a href="tel:+38762610206" className="hidden md:flex items-center gap-2 text-sm font-semibold text-primary">
             <Phone className="w-4 h-4" />
             062 610 206
           </a>
           <Button className="hidden sm:inline-flex" size="sm" asChild>
-            <Link to="/iletisim">Teklif Al</Link>
+            <Link to="/iletisim">{t("nav.getQuote")}</Link>
           </Button>
 
           {/* Mobile Menu Button */}

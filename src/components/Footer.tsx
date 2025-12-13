@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, Instagram, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
+
+  const quickLinks = [
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.about"), href: "/hakkimizda" },
+    { label: t("nav.products"), href: "/urunler" },
+    { label: t("nav.certificates"), href: "/sertifikalar" },
+    { label: t("nav.contact"), href: "/iletisim" },
+  ];
 
   return (
     <footer className="bg-foreground text-primary-foreground">
@@ -21,8 +31,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-primary-foreground/80 max-w-md mb-6">
-              Temiz, güvenli, profesyonel. FOMY temizlik köpüğü ile hızlı ve pratik hijyen çözümleri sunuyoruz.
-              20 yılı aşkın deneyimimizle güvenilir ortağınız.
+              {t("footer.description")}
             </p>
             <div className="flex gap-4">
               <a
@@ -44,15 +53,9 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-semibold text-lg mb-6">Hızlı Bağlantılar</h4>
+            <h4 className="font-display font-semibold text-lg mb-6">{t("footer.quickLinks")}</h4>
             <ul className="space-y-3">
-              {[
-                { label: "Ana Sayfa", href: "/" },
-                { label: "Hakkımızda", href: "/hakkimizda" },
-                { label: "Ürünler", href: "/urunler" },
-                { label: "Sertifikalar", href: "/sertifikalar" },
-                { label: "İletişim", href: "/iletisim" },
-              ].map((link) => (
+              {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
@@ -67,7 +70,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-semibold text-lg mb-6">İletişim</h4>
+            <h4 className="font-display font-semibold text-lg mb-6">{t("footer.contactTitle")}</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-accent mt-0.5" />
@@ -104,9 +107,9 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/10">
         <div className="container-wide py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/60">
-          <p>&copy; {currentYear} Berra d.o.o. Tüm hakları saklıdır.</p>
+          <p>&copy; {currentYear} Berra d.o.o. {t("footer.rights")}</p>
           <p>
-            FOMY Ürünleri -{" "}
+            {t("footer.fomyProducts")} -{" "}
             <a href="https://www.fomy.com.tr" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground">
               www.fomy.com.tr
             </a>

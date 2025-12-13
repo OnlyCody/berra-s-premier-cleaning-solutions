@@ -1,22 +1,25 @@
 import { Link } from "react-router-dom";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { products } from "@/data/products";
 
 export function Products() {
+  const { t } = useLanguage();
+
   return (
     <section id="urunler" className="section-padding bg-muted/30">
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Ürün Kataloğu
+            {t("products.subtitle")}
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Ürünlerimizi Keşfedin
+            {t("products.title")}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Tüm cilt tiplerine uygun, kaliteli ve ekonomik temizlik çözümleri
+            {t("products.description")}
           </p>
         </div>
 
@@ -72,7 +75,7 @@ export function Products() {
                 <Button variant="outline" size="sm" className="w-full group/btn" asChild>
                   <Link to={`/urun/${product.id}`}>
                     <ShoppingBag className="w-4 h-4" />
-                    Detayları Gör
+                    {t("products.details")}
                     <ArrowRight className="w-4 h-4 opacity-0 -ml-4 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all" />
                   </Link>
                 </Button>

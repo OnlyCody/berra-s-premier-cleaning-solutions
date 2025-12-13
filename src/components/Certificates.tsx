@@ -1,58 +1,61 @@
 import { Shield, Award, FileCheck, Building2 } from "lucide-react";
-
-const certificates = [
-  {
-    icon: Shield,
-    title: "ISO 9001:2015",
-    description: "Kalite Yönetim Sistemi Sertifikası",
-    issuer: "Uluslararası Standartlar",
-  },
-  {
-    icon: Award,
-    title: "ISO 14001:2015",
-    description: "Çevre Yönetim Sistemi Sertifikası",
-    issuer: "Uluslararası Standartlar",
-  },
-  {
-    icon: FileCheck,
-    title: "TSE Belgesi",
-    description: "Türk Standardlarına Uygunluk Belgesi",
-    issuer: "Türk Standardları Enstitüsü",
-  },
-  {
-    icon: Building2,
-    title: "Sanayi Kapasite Raporu",
-    description: "İstanbul Sanayi Odası Onaylı",
-    issuer: "TOBB - İstanbul",
-  },
-  {
-    icon: Shield,
-    title: "T.C. Sağlık Bakanlığı",
-    description: "Kozmetik Ürün Ruhsatı",
-    issuer: "Türkiye İlaç ve Tıbbi Cihaz Kurumu",
-  },
-  {
-    icon: Award,
-    title: "Yerli Malı Belgesi",
-    description: "Yerli Üretim Onay Belgesi",
-    issuer: "TSE İstanbul",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Certificates() {
+  const { t } = useLanguage();
+
+  const certificates = [
+    {
+      icon: Shield,
+      title: "ISO 9001:2015",
+      description: "Kalite Yönetim Sistemi Sertifikası",
+      issuer: "Uluslararası Standartlar",
+    },
+    {
+      icon: Award,
+      title: "ISO 14001:2015",
+      description: "Çevre Yönetim Sistemi Sertifikası",
+      issuer: "Uluslararası Standartlar",
+    },
+    {
+      icon: FileCheck,
+      title: "TSE Belgesi",
+      description: "Türk Standardlarına Uygunluk Belgesi",
+      issuer: "Türk Standardları Enstitüsü",
+    },
+    {
+      icon: Building2,
+      title: "Sanayi Kapasite Raporu",
+      description: "İstanbul Sanayi Odası Onaylı",
+      issuer: "TOBB - İstanbul",
+    },
+    {
+      icon: Shield,
+      title: "T.C. Sağlık Bakanlığı",
+      description: "Kozmetik Ürün Ruhsatı",
+      issuer: "Türkiye İlaç ve Tıbbi Cihaz Kurumu",
+    },
+    {
+      icon: Award,
+      title: "Yerli Malı Belgesi",
+      description: "Yerli Üretim Onay Belgesi",
+      issuer: "TSE İstanbul",
+    },
+  ];
+
   return (
     <section id="sertifikalar" className="section-padding bg-background">
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-4">
-            Güvenilirlik
+            {t("certificates.subtitle")}
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Sertifikalarımız
+            {t("certificates.title")}
           </h2>
           <p className="text-muted-foreground text-lg">
-            Uluslararası standartlarda üretim, güvenilir ve kaliteli ürünler
+            {t("certificates.description")}
           </p>
         </div>
 
