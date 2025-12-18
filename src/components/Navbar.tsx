@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-import roseLogo from "@/assets/rose-logo.png";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +45,9 @@ export function Navbar() {
       <div className="container-wide flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <img src={roseLogo} alt="Berra Logo" className="w-12 h-12 object-contain" />
+          <div className="w-12 h-12 rounded-xl gradient-hero flex items-center justify-center shadow-soft">
+            <span className="text-primary-foreground font-display font-bold text-xl">B</span>
+          </div>
           <div>
             <h1 className="font-display font-bold text-xl text-foreground leading-none">
               BERRA
