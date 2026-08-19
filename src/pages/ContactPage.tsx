@@ -63,21 +63,6 @@ const faqs = [
 ];
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    subject: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.");
-    setFormData({ name: "", email: "", phone: "", company: "", subject: "", message: "" });
-  };
-
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
