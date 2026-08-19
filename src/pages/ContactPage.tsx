@@ -1,9 +1,4 @@
-import { useState } from "react";
-import { Phone, Mail, MapPin, Instagram, Globe, Send, Clock, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { Phone, Mail, MapPin, Instagram, Globe, Clock } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
