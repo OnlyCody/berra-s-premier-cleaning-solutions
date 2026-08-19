@@ -1,9 +1,4 @@
-import { useState } from "react";
-import { Phone, Mail, MapPin, Instagram, Globe, Send, Clock, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { Phone, Mail, MapPin, Instagram, Globe, Clock } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
@@ -68,21 +63,6 @@ const faqs = [
 ];
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    subject: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.");
-    setFormData({ name: "", email: "", phone: "", company: "", subject: "", message: "" });
-  };
-
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -108,143 +88,57 @@ export default function ContactPage() {
       {/* Contact Content */}
       <section className="section-padding bg-background">
         <div className="container-wide">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <div className="bg-card rounded-3xl p-8 shadow-card border border-border/50">
-                <h2 className="font-display text-2xl font-semibold text-foreground mb-6 flex items-center gap-3">
-                  <MessageCircle className="w-6 h-6 text-primary" />
-                  Mesaj Gönderin
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Adınız Soyadınız *
-                      </label>
-                      <Input
-                        placeholder="Adınızı giriniz"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
-                      />
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Info */}
+            <div className="bg-card rounded-3xl p-8 shadow-card border border-border/50">
+              <h2 className="font-display text-2xl font-semibold text-foreground mb-6 flex items-center gap-3">
+                <Phone className="w-6 h-6 text-primary" />
+                İletişim Bilgileri
+              </h2>
+              <div className="grid gap-4">
+                {contactInfo.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="group flex items-center gap-4 p-4 rounded-xl hover:bg-muted/50 transition-colors"
+                  >
+                    <div className="w-12 h-12 rounded-xl gradient-hero flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <item.icon className="w-5 h-5 text-primary-foreground" />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        E-posta *
-                      </label>
-                      <Input
-                        type="email"
-                        placeholder="E-posta adresiniz"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        required
-                      />
+                      <span className="block text-xs text-muted-foreground uppercase tracking-wider">
+                        {item.label}
+                      </span>
+                      <span className="text-foreground font-medium">
+                        {item.value}
+                      </span>
                     </div>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Telefon
-                      </label>
-                      <Input
-                        placeholder="Telefon numaranız"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Firma Adı
-                      </label>
-                      <Input
-                        placeholder="Firma adınız (opsiyonel)"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Konu *
-                    </label>
-                    <Input
-                      placeholder="Mesaj konusu"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Mesajınız *
-                    </label>
-                    <Textarea
-                      placeholder="Mesajınızı yazın..."
-                      rows={6}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                    />
-                  </div>
-
-                  <Button type="submit" size="lg" className="w-full sm:w-auto">
-                    <Send className="w-5 h-5" />
-                    Mesaj Gönder
-                  </Button>
-                </form>
+                  </a>
+                ))}
               </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Contact Info */}
-              <div className="bg-card rounded-2xl p-6 shadow-card border border-border/50">
-                <h3 className="font-display text-lg font-semibold text-foreground mb-6">
-                  İletişim Bilgileri
-                </h3>
-                <div className="space-y-4">
-                  {contactInfo.map((item, index) => (
-                    <a
-                      key={index}
-                      href={item.href}
-                      target={item.href.startsWith("http") ? "_blank" : undefined}
-                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors"
-                    >
-                      <div className="w-10 h-10 rounded-lg gradient-hero flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <item.icon className="w-5 h-5 text-primary-foreground" />
-                      </div>
-                      <div>
-                        <span className="block text-xs text-muted-foreground uppercase tracking-wider">
-                          {item.label}
-                        </span>
-                        <span className="text-foreground font-medium text-sm">
-                          {item.value}
-                        </span>
-                      </div>
-                    </a>
-                  ))}
-                </div>
+            {/* Working Hours */}
+            <div className="bg-card rounded-3xl p-8 shadow-card border border-border/50">
+              <h2 className="font-display text-2xl font-semibold text-foreground mb-6 flex items-center gap-3">
+                <Clock className="w-6 h-6 text-primary" />
+                Çalışma Saatleri
+              </h2>
+              <div className="space-y-4">
+                {workingHours.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center p-4 rounded-xl bg-muted/30">
+                    <span className="text-muted-foreground font-medium">{item.day}</span>
+                    <span className="text-foreground font-semibold">{item.hours}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* Working Hours */}
-              <div className="bg-card rounded-2xl p-6 shadow-card border border-border/50">
-                <h3 className="font-display text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-primary" />
-                  Çalışma Saatleri
-                </h3>
-                <div className="space-y-3">
-                  {workingHours.map((item, index) => (
-                    <div key={index} className="flex justify-between items-center">
-                      <span className="text-muted-foreground">{item.day}</span>
-                      <span className="text-foreground font-medium">{item.hours}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="mt-8 p-4 rounded-xl bg-primary/10 border border-primary/20">
+                <p className="text-primary font-medium text-sm">
+                  Acil durumlar ve toptan siparişler için doğrudan telefon numaralarımızdan bize ulaşabilirsiniz.
+                </p>
               </div>
             </div>
           </div>
